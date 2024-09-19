@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "@apollo/server": "^4.11.0",
     "@as-integrations/next": "^3.0.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
