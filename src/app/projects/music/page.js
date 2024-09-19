@@ -9,7 +9,7 @@ import Header from './components/Header';
 import FooterControls from './components/FooterControls';
 import Favorites from './components/Favorites';
 import client from './apollo-client';
-
+import Image from "next/image";
 const MusicApp = () => {
   const [songs, setSongs] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -127,7 +127,7 @@ const MusicApp = () => {
                       }, 100);
                     }}
                   >
-                    <img
+                    <Image
                       src={song.image}
                       alt={song.name}
                       className="w-full h-48 object-cover rounded-lg"

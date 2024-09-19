@@ -1,6 +1,6 @@
 "use client";
 import { gql, useQuery } from '@apollo/client';
-
+import Image from "next/image";
 const NEW_RELEASES_QUERY = gql`
   query GetNewReleases {
     newReleaseSongs {
@@ -26,7 +26,7 @@ const NewReleases = () => {
       <div className="grid grid-cols-4 gap-4">
         {releases.map((release) => (
           <div key={release.id} className="text-center">
-            <img src={release.image} alt={release.name} className="w-full h-48 object-cover rounded-lg" />
+            <Image src={release.image} alt={release.name} className="w-full h-48 object-cover rounded-lg" />
             <p className="mt-2">{release.name}</p>
           </div>
         ))}

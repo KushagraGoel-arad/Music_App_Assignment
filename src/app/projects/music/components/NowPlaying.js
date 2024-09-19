@@ -1,6 +1,5 @@
-
 import { useRef, useState, useEffect } from 'react';
-
+import Image from "next/image";
 const formatTime = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
@@ -18,18 +17,21 @@ const NowPlaying = ({ currentSong, songQueue = [], setSongQueue }) => {
   const [currentIndex, setCurrentIndex] = useState(songQueue.findIndex(song => song.song_url === currentSong.song_url));
 
   useEffect(() => {
-    if (audioRef.current && currentSong) {
-      audioRef.current.src = currentSong.song_url;
-      audioRef.current.load();
-      audioRef.current.play().catch(error => {
+    const audioElement = audioRef.current;
+    
+    if (audioElement && currentSong) {
+      audioElement.src = currentSong.song_url;
+      audioElement.load();
+      audioElement.play().catch(error => {
         console.error('Playback error:', error);
       });
       setIsPlaying(true);
       setCurrentIndex(songQueue.findIndex(song => song.song_url === currentSong.song_url));
     }
+  
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
+      if (audioElement) {
+        audioElement.pause();
       }
     };
   }, [currentSong, songQueue]);
@@ -127,35 +129,35 @@ const NowPlaying = ({ currentSong, songQueue = [], setSongQueue }) => {
     <div className="footer-controls fixed bottom-0 left-0 right-0 bg-black text-white p-4 flex justify-between items-center">
       <div className="controls flex items-center space-x-4 flex-shrink-0 mr-8">
         <button onClick={toggleShuffle} className="focus:outline-none">
-          <img
+          <Image
             src={`/icons/icon/media/${isShuffle ? 'shuffle_active' : 'shuffle'}.png`}
             alt="Shuffle"
             className="w-6 h-6"
           />
         </button>
         <button onClick={playPrevious} className="focus:outline-none">
-          <img
+          <Image
             src="/icons/icon/media/skip_previous.png"
             alt="Previous"
             className="w-6 h-6"
           />
         </button>
         <button onClick={togglePlayPause} className="focus:outline-none">
-          <img
+          <Image
             src={isPlaying ? "/icons/icon/media/pause_circle_filled.png" : "/icons/icon/media/play_circle_filled.png"}
             alt={isPlaying ? "Pause" : "Play"}
             className="w-8 h-8"
           />
         </button>
         <button onClick={playNext} className="focus:outline-none">
-          <img
+          <Image
             src="/icons/icon/media/skip_next.png"
             alt="Next"
             className="w-6 h-6"
           />
         </button>
         <button onClick={toggleRepeat} className="focus:outline-none">
-          <img
+          <Image
             src={`/icons/icon/media/${isRepeat ? 'repeat_active' : 'repeat'}.png`}
             alt="Repeat"
             className="w-6 h-6"
@@ -165,7 +167,7 @@ const NowPlaying = ({ currentSong, songQueue = [], setSongQueue }) => {
 
       <div className="now-playing flex items-center space-x-4 w-1/2 ml-10">
         <div className="song-image">
-          <img src={currentSong.image} alt={currentSong.name} className="w-12 h-12 object-cover rounded-md" />
+          <Image src={currentSong.image} alt={currentSong.name} className="w-12 h-12 object-cover rounded-md" />
         </div>
 
         <div className="progress-bar-section w-full">

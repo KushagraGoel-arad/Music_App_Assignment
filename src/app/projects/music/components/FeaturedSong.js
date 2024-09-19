@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
 import Header from './Header';
-
+import Image from "next/image";
 const FEATURED_SONG_QUERY = gql`
   query {
     newReleaseSongs {
@@ -31,7 +31,7 @@ const FeaturedSong = ({ currentSong, setCurrentSong }) => {
       {song && (
         <>
           
-          <img
+          <Image
             src={song.image}
             alt={song.name}
             className="absolute inset-0 h-full w-full object-cover opacity-60"
