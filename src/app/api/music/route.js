@@ -14,6 +14,12 @@ const handler = startServerAndCreateNextHandler(server, {
     res,
     dataSources: {},
   }),
+  cors: {
+    origin: ["https://music-app-assignment-frontend.vercel.app"],  
+    methods: ["GET", "POST"],  
+    credentials: true, 
+    allowedHeaders: ["Content-Type", "Authorization"],  
+  },
 });
 export async function GET(request) {
   return handler(request);
